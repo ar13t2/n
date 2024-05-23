@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Notas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="app">
+        <h1>Notas</h1>
+        <div class="note-form">
+            <input type="text" id="note-title" placeholder="Título de la nota">
+            <textarea id="note-content" placeholder="Contenido de la nota"></textarea>
+            <select id="note-category">
+                <option value="work">Trabajo</option>
+                <option value="personal">Personal</option>
+                <option value="important">Importante</option>
+            </select>
+            <button id="add-note">Agregar Nota</button>
+        </div>
+        <div class="notes-list" id="notes-list"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
