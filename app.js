@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const noteCategory = document.getElementById('note-category');
     const addNoteButton = document.getElementById('add-note');
     const notesList = document.getElementById('notes-list');
+    const scrollToTopButton = document.getElementById('scroll-to-top'); // Línea añadida
 
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    addNoteButton.addEventListener('click', () => {
+    const addNote = () => {
         const newNote = {
             title: noteTitle.value,
             content: noteContent.value,
@@ -35,44 +36,57 @@ document.addEventListener('DOMContentLoaded', () => {
         notes.push(newNote);
         saveNotes();
         renderNotes();
-        noteTitle.value = '';
-        noteContent.value = '';
-        noteCategory.value = 'work';
-    });
+        resetForm();
+    };
 
-    window.editNote = (index) => {
+    const editNote = (index) => {
         const note = notes[index];
         noteTitle.value = note.title;
         noteContent.value = note.content;
         noteCategory.value = note.category;
         addNoteButton.textContent = 'Guardar Cambios';
         addNoteButton.onclick = () => {
-            notes[index] = {
-                title: noteTitle.value,
-                content: noteContent.value,
-                category: noteCategory.value
-            };
-            saveNotes();
-            renderNotes();
-            addNoteButton.textContent = 'Agregar Nota';
-            addNoteButton.onclick = addNote;
-            noteTitle.value = '';
-            noteContent.value = '';
-            noteCategory.value = 'work';
+            updateNote(index);
         };
     };
 
-    window.deleteNote = (index) => {
+    const updateNote = (index) => {
+        notes[index] = {
+            title: noteTitle.value,
+            content: noteContent.value,
+            category: noteCategory.value
+        };
+        saveNotes();
+        renderNotes();
+        resetForm();
+        addNoteButton.textContent = 'Agregar Nota';
+        addNoteButton.onclick = addNote;
+    };
+
+    const deleteNote = (index) => {
         notes.splice(index, 1);
         saveNotes();
         renderNotes();
     };
+
+    const resetForm = () => {
+        noteTitle.value = '';
+        noteContent.value = '';
+        noteCategory.value = 'work';
+    };
+
+    addNoteButton.addEventListener('click', addNote);
+
+    // Event listener para el botón "Volver a la parte superior"
+    scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     renderNotes();
 });
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js')
-    .then(() => console.log('Service Worker registered'))
-    .catch(error => console.log('Service Worker registration failed:', error));
+    .then(() => console.log('Service Worker registrado'))
+    .catch(error => console.log('Error en el registro del Service Worker:', error));
 }
