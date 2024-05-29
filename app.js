@@ -72,13 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Event listener para el botón "Volver a la parte superior"
-    scrollToTopButton.addEventListener('click', () => {
+   scrollToTopButton.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Mostrar el botón "Volver a la parte superior" cuando se desplaza hacia abajo
+    // Mostrar el botón de "Volver a la parte superior" cuando se hace scroll hacia abajo
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 200) {
             scrollToTopButton.classList.add('show');
         } else {
             scrollToTopButton.classList.remove('show');
