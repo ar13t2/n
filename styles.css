@@ -55,3 +55,20 @@ body {
 .note.important {
     border-left: 5px solid #FF5722;
 }
+
+#scroll-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#scroll-to-top.show {
+    display: block;
+}
