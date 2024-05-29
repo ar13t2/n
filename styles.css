@@ -56,7 +56,7 @@ body {
     border-left: 5px solid #FF5722;
 }
 
-/*#scroll-to-top {
+#scroll-to-top {
     display: none;
     position: fixed;
     bottom: 20px;
@@ -71,4 +71,4 @@ body {
 
 #scroll-to-top.show {
     display: block;
-}*/
+}
