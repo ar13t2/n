@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const noteCategory = document.getElementById('note-category');
     const addNoteButton = document.getElementById('add-note');
     const notesList = document.getElementById('notes-list');
-    const scrollToTopButton = document.getElementById('scroll-to-top'); // Línea añadida
+    const scrollToTopButton = document.getElementById('scroll-to-top');
 
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    addNoteButton.addEventListener('click', () => {
+    const addNote = () => {
         const newNote = {
             title: noteTitle.value,
             content: noteContent.value,
@@ -39,7 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
         noteTitle.value = '';
         noteContent.value = '';
         noteCategory.value = 'work';
-    });
+    };
+
+    addNoteButton.addEventListener('click', addNote);
 
     window.editNote = (index) => {
         const note = notes[index];
@@ -68,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveNotes();
         renderNotes();
     };
+
     // Event listener para el botón "Volver a la parte superior"
     scrollToTopButton.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
