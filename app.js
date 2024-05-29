@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mostrar el botón "Volver a la parte superior" cuando se desplaza hacia abajo
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 200) {
             scrollToTopButton.classList.add('show');
         } else {
             scrollToTopButton.classList.remove('show');
