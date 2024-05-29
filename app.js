@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const noteCategory = document.getElementById('note-category');
     const addNoteButton = document.getElementById('add-note');
     const notesList = document.getElementById('notes-list');
+    const scrollToTopButton = document.getElementById('scroll-to-top'); // Línea añadida
 
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
@@ -67,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
         saveNotes();
         renderNotes();
     };
+    // Event listener para el botón "Volver a la parte superior"
+    scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     renderNotes();
 });
