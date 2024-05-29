@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const noteCategory = document.getElementById('note-category');
     const addNoteButton = document.getElementById('add-note');
     const notesList = document.getElementById('notes-list');
-    const scrollToTopButton = document.getElementById('scroll-to-top'); // Línea añadida
 
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const addNote = () => {
+    addNoteButton.addEventListener('click', () => {
         const newNote = {
             title: noteTitle.value,
             content: noteContent.value,
@@ -36,18 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
         notes.push(newNote);
         saveNotes();
         renderNotes();
-        resetForm();
-    };
+        noteTitle.value = '';
+        noteContent.value = '';
+        noteCategory.value = 'work';
+    });
 
-    const editNote = (index) => {
+    window.editNote = (index) => {
         const note = notes[index];
         noteTitle.value = note.title;
         noteContent.value = note.content;
         noteCategory.value = note.category;
         addNoteButton.textContent = 'Guardar Cambios';
         addNoteButton.onclick = () => {
-            updateNote(index);
-        notes[index] = {
+            notes[index] = {
                 title: noteTitle.value,
                 content: noteContent.value,
                 category: noteCategory.value
@@ -61,28 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
             noteCategory.value = 'work';
         };
     };
-  
 
-    const deleteNote = (index) => {
+    window.deleteNote = (index) => {
         notes.splice(index, 1);
         saveNotes();
         renderNotes();
     };
-
-   
-
-    addNoteButton.addEventListener('click', addNote);
-
-    // Event listener para el botón "Volver a la parte superior"
-    scrollToTopButton.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 
     renderNotes();
 });
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js')
-    .then(() => console.log('Service Worker registrado'))
-    .catch(error => console.log('Error en el registro del Service Worker:', error));
+    .then(() => console.log('Service Worker registered'))
+    .catch(error => console.log('Service Worker registration failed:', error));
 }
