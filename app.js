@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
    scrollToTopButton.addEventListener('click', () => {
-        document.querySelector('.app').scrollIntoView({ behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Mostrar el botón de "Volver a la parte superior" cuando se hace scroll hacia abajo
@@ -83,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollToTopButton.classList.remove('show');
         }
     });
+
+    
 
     renderNotes();
 });
