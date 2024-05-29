@@ -47,21 +47,21 @@ document.addEventListener('DOMContentLoaded', () => {
         addNoteButton.textContent = 'Guardar Cambios';
         addNoteButton.onclick = () => {
             updateNote(index);
-        };
-    };
-
-    const updateNote = (index) => {
         notes[index] = {
-            title: noteTitle.value,
-            content: noteContent.value,
-            category: noteCategory.value
+                title: noteTitle.value,
+                content: noteContent.value,
+                category: noteCategory.value
+            };
+            saveNotes();
+            renderNotes();
+            addNoteButton.textContent = 'Agregar Nota';
+            addNoteButton.onclick = addNote;
+            noteTitle.value = '';
+            noteContent.value = '';
+            noteCategory.value = 'work';
         };
-        saveNotes();
-        renderNotes();
-        resetForm();
-        addNoteButton.textContent = 'Agregar Nota';
-        addNoteButton.onclick = addNote;
     };
+  
 
     const deleteNote = (index) => {
         notes.splice(index, 1);
@@ -69,11 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderNotes();
     };
 
-    const resetForm = () => {
-        noteTitle.value = '';
-        noteContent.value = '';
-        noteCategory.value = 'work';
-    };
+   
 
     addNoteButton.addEventListener('click', addNote);
 
